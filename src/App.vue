@@ -4,8 +4,8 @@
 const msg = 'Hello World'
 </script>
 
-<template>
-  <h1>{{ msg }}</h1>
+<template lang="pug">
+h1 {{ msg }}
 </template>
 
 <style lang="sass">
