@@ -1,18 +1,15 @@
 <script setup>
-const showValue = false
-const value = 'Algo'
+import {ref} from 'vue';
 
-const items = [1,2,3,4,5]
+const name = ref('');
+const url = ref('http://github.com')
 </script>
 
 <template lang="pug">
-p(v-show="showValue") {{ value }}
-p(v-if="showValue") {{ value }}
-p(v-if="false") {{ value }}
-p(v-else="showValue") {{ 'algo mas' }}
+input(v-model="name")
+p {{name}}
 
-ul
-  li(v-for="i in items") {{ i }}
+a(:href="url") Link
 </template>
 
 <style lang="sass">
