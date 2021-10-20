@@ -1,15 +1,18 @@
 <script setup>
-const msg = 'hello world'
-const person = {
-  name: 'Juan'
-}
+const showValue = false
+const value = 'Algo'
+
+const items = [1,2,3,4,5]
 </script>
 
 <template lang="pug">
-h1 {{ msg }}
-p {{ 1 + 1}}
-p {{ 'hola' + 'mundo'}}
-p {{ JSON.stringify(person) }}
+p(v-show="showValue") {{ value }}
+p(v-if="showValue") {{ value }}
+p(v-if="false") {{ value }}
+p(v-else="showValue") {{ 'algo mas' }}
+
+ul
+  li(v-for="i in items") {{ i }}
 </template>
 
 <style lang="sass">
