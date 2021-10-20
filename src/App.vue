@@ -1,19 +1,50 @@
-<script setup>
-import { ref } from 'vue';
+<script>
+const tracks = [
+  { name: 'Muchacha', artist: 'Luis Alberto Spinetta' },
+  { name: 'Hoy aca en el baile', artist: 'El Pepo' },
+  { name: 'I was made for loving you', artist: 'Kiss' }
+]
 
-const name = ref('')
-const formatName = ref('')
-function format() {
-  formatName.value = name.value.split(' ').join('-').toUpperCase()
+export default {
+  data () {
+    return {
+      searchQuery: '',
+      tracks: []
+    }
+  },
+  computed: {
+    searchMessage () {
+      return `Encontrados: ${this.tracks.length}`
+    }
+  },
+  methods: {
+    search () {
+      this.tracks = tracks
+    }
+  }
 }
+
 </script>
 
 <template lang="pug">
-input(v-model="name")
-button(@click="format") Format
-p {{ formatName }}
+section.section
+  nav.nav.has-shadow
+    .container
+      input.input.is-large(type="text", placeholder="Buscar canciones", v-model="searchQuery")
+      a.button.is-info.is-large(@click="search") Buscar
+      a.button.is-danger.is-large &times;
+      p
+        small {{ searchMessage }}
+
+  .container.results
+    .columns
+      .column(v-for="t in tracks") {{ t.name }}-{{ t.artist}}
 </template>
 
-<style lang="sass">
-@import './scss/main.scss'
+<style lang="scss">
+@import './scss/main.scss';
+
+.results {
+  margin-top: 50px;
+}
 </style>

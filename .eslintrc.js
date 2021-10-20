@@ -1,11 +1,13 @@
 module.exports = {
   env: {
-    browser: true,
+    node: true,
     es2021: true
   },
   extends: [
     'plugin:vue/essential',
-    'standard'
+    'plugin:vue/vue3-recommended',
+    'standard',
+    'eslint:recommended'
   ],
   parserOptions: {
     ecmaVersion: 12,
