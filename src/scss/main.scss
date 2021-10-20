@@ -1,1 +1,61 @@
-@import '../../node_modules/bulma/bulma.sass'
+@import '../../node_modules/bulma/bulma.sass';
+
+$orange: #FF9300;
+$light_blue: #A3ECF3;
+$sky_blue: #00BFD6;
+$black: #212121;
+
+.container {
+  width: 320px;
+  height: 409px;
+  margin: 30px auto;
+  padding: 0 15px;
+  position: relative;
+  font-family: "Roboto", sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+h1 {
+  font-size: 1.5em;
+  color: $light_blue;
+  text-align: center;
+  font-weight: bold;
+  margin: 10px 0;
+  font-weight: 900;
+}
+
+label {
+  display: block;
+  font-size: 10px;
+  color:$orange;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+input[type="text"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid $orange;
+  color: $black;
+  font-size: 1.5em;
+}
+
+input[type="submit"] {
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+  width: 50%;
+  color: #FFF;
+  background: $sky_blue;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  border: none;
+  padding: 5px;
+}
+
+input:focus {
+  outline: none;
+}
