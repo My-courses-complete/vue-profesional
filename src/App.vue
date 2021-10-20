@@ -1,25 +1,17 @@
 <script setup>
-import {ref, computed} from 'vue';
+import { ref } from 'vue';
 
 const name = ref('')
-const lastName = ref('')
-const fullname = computed(() => `${name.value} ${lastName.value}`)
-const birthday = ref(new Date())
-const current = new Date()
-console.log(birthday.value)
-const edad = computed(() => {
-  console.log(new Date(birthday.value))
-  const fecha = new Date().getTime() - new Date(birthday.value).getTime()
-  return Math.round(fecha/(1000*60*60*24*365))
-})
+const formatName = ref('')
+function format() {
+  formatName.value = name.value.split(' ').join('-').toUpperCase()
+}
 </script>
 
 <template lang="pug">
 input(v-model="name")
-input(v-model="lastName")
-input(v-model="birthday" type="date")
-p {{ fullname }}
-p edad: {{ edad }}
+button(@click="format") Format
+p {{ formatName }}
 </template>
 
 <style lang="sass">
