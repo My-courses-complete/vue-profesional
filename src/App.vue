@@ -1,18 +1,23 @@
 
 <script>
-import trackService from './services/track'
-import Footer from './components/layout/Footer.vue'
-import Header from './components/layout/Header.vue'
+import trackService from '@/services/track'
+import Footer from '@/components/layout/Footer.vue'
+import Header from '@/components/layout/Header.vue'
+import Track from '@/components/Track.vue'
+import Loader from '@/components/shared/Loader.vue'
 
 export default {
   components: {
     Footer,
-    Header
+    Header,
+    Track,
+    Loader
   },
   data () {
     return {
       searchQuery: '',
-      tracks: []
+      tracks: [],
+      isLoading: false
     }
   },
   computed: {
@@ -31,8 +36,12 @@ export default {
       if (!this.searchQuery) {
         return
       }
+
+      this.isLoading = true
+
       trackService.search(this.searchQuery)
         .then(res => {
+          this.isLoading = false
           this.tracks = res.tracks.items
         })
     }
@@ -42,7 +51,8 @@ export default {
 
 <template lang="pug">
 Header
-section.section
+Loader(v-show="isLoading")
+section.section(v-show="!isLoading")
   nav.nav.has-shadow
     .container
       input.input.is-large(type="text", placeholder="Buscar canciones", v-model="searchQuery")
@@ -53,9 +63,9 @@ section.section
       small {{ searchMessage }}
 
   .container.results
-    .columns
-      .column(v-for="t in tracks")
-        | {{ t.name }}-{{ t.artists[0].name }}
+    .columns.is-multiline
+      .column.is-one-quarter(v-for="t in tracks")
+        Track(:track="t")
 Footer
 </template>
 
