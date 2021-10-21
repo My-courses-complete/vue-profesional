@@ -1,8 +1,12 @@
 
 <script>
 import trackService from './services/track'
+import ChildComponent from './components/ChildComponent.vue'
 
 export default {
+  components: {
+    ChildComponent
+  },
   data () {
     return {
       searchQuery: '',
@@ -30,6 +34,7 @@ export default {
 
 <template lang="pug">
 section.section
+  ChildComponent
   nav.nav.has-shadow
     .container
       input.input.is-large(type="text", placeholder="Buscar canciones", v-model="searchQuery")
