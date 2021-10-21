@@ -1,11 +1,13 @@
 
 <script>
 import trackService from './services/track'
-import ChildComponent from './components/ChildComponent.vue'
+import Footer from './components/layout/Footer.vue'
+import Header from './components/layout/Header.vue'
 
 export default {
   components: {
-    ChildComponent
+    Footer,
+    Header
   },
   data () {
     return {
@@ -33,8 +35,8 @@ export default {
 </script>
 
 <template lang="pug">
+Header
 section.section
-  ChildComponent
   nav.nav.has-shadow
     .container
       input.input.is-large(type="text", placeholder="Buscar canciones", v-model="searchQuery")
@@ -48,6 +50,7 @@ section.section
     .columns
       .column(v-for="t in tracks")
         | {{ t.name }}-{{ t.artists[0].name }}
+Footer
 </template>
 
 <style lang="scss">
