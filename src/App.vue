@@ -20,6 +20,12 @@ export default {
       return `Encontrados: ${this.tracks.length}`
     }
   },
+  created () {
+    console.log('created...')
+  },
+  mounted () {
+    console.log('mounted...')
+  },
   methods: {
     search () {
       if (!this.searchQuery) {
