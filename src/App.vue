@@ -1,76 +1,77 @@
-<script setup>
+
+<script>
+export default {
+  data () {
+    return {
+      name: 'Jesus task',
+      tasks: [],
+      newTask: {
+        title: '',
+        time: undefined
+      }
+    }
+  },
+  computed: {
+    showTask () {
+      return this.tasks
+    },
+    totalTime () {
+      if (this.tasks.length === 0) {
+        return 0
+      }
+      let total = 0
+      this.tasks.map((t) => total += t.time) // eslint-disable-line
+      return total
+    }
+  },
+  created () {
+    this.tasks = JSON.parse(localStorage.getItem('tasks')) || []
+  },
+  methods: {
+    addTask () {
+      if (!this.newTask.title || !this.newTask.time) {
+        return
+      }
+      this.tasks.push({ title: this.newTask.title, time: this.newTask.time })
+      this.newTask.title = ''
+      this.newTask.time = 0
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
+    },
+    removeTask (i) {
+      this.tasks.splice(i, 1)
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
+    },
+    cancel () {
+      this.newTask.title = ''
+      this.newTask.time = 0
+    }
+  }
+}
+
 </script>
 
 <template lang="pug">
-.header
-  nav
-    .logo
-      img.logo(src='https://static.platzi.com/media/user_upload/logo-d871d30b-ac23-4240-93f3-13e49084d80b.jpg')
-    .search-bar
-      input.search(type='text' placeholder='Busca tu peli, actor o director favorito')
-    .user
-      div.container
-        p.user-name Jesus Mejia
-        i.fa.fa-user-circle-o(aria-hidden='true')
-        i.fa.fa-sort-desc(aria-hidden='true')
-.content
-  .side-bar
-    .first
-      i.fa.fa-home(aria-hidden='true')
-      p Home
-      i.fa.fa-heart(aria-hidden='true')
-      p Trending
-      i.fa.fa-fire(aria-hidden='true')
-      p More likes
-    .last
-      i.fa.fa-cog(aria-hidden='true')
-      p Settings
-  .content-down
-    h2 Ahora en cine
-    div.container-images
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-    h2 Aclamadas por la critica
-    div.container-images
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-    h2 No te debes de perder
-    div.container-images
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-      div.over
-        div.color
-          h4 The Secret Life of Pets
-          h6 The quiet life of a terrier named Max is upended when his owner takes in Duke, a stray whom Max instantly dislikes.
-
+.section
+  .container
+    h1 {{ name }} - Total tiempo {{ totalTime }}
+  .container
+    ul(v-if="tasks.length > 0")
+      li(v-for="(t,i) in showTask")
+        h3 {{ i }}. {{t.title}} | {{t.time}} horas
+        button(@click="removeTask(i)") &times;
+    h3(v-else) You havent task
+  .container
+    h2 Create new task
+    input(type="text" placeholder="add title a new task" v-model="newTask.title")
+    input(type="number" v-model="newTask.time" placeholder="How long will it take in hours")
+    button(@click="addTask") Add
+    button(@click="cancel") Cancel
 </template>
 
-<style lang="sass">
-@import './scss/main.scss'
+<style lang="scss">
+@import './scss/main.scss';
+
+.results {
+  margin-top: 50px;
+}
 </style>
