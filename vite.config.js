@@ -12,6 +12,9 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     open: true
+  },
+  build: {
+    sourcemap: true,
   }
 }
 )
