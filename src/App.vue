@@ -5,25 +5,37 @@ import Footer from '@/components/layout/Footer.vue'
 import Header from '@/components/layout/Header.vue'
 import Track from '@/components/Track.vue'
 import Loader from '@/components/shared/Loader.vue'
+import Notification from '@/components/shared/Notification.vue'
 
 export default {
   components: {
     Footer,
     Header,
     Track,
-    Loader
+    Loader,
+    Notification
   },
   data () {
     return {
       searchQuery: '',
       tracks: [],
       isLoading: false,
+      showNotification: false,
       selectedTrack: ''
     }
   },
   computed: {
     searchMessage () {
       return `Encontrados: ${this.tracks.length}`
+    }
+  },
+  watch: {
+    showNotification () {
+      if (this.showNotification) {
+        setTimeout(() => {
+          this.showNotification = false
+        }, 3000)
+      }
     }
   },
   created () {
@@ -43,6 +55,7 @@ export default {
       trackService.search(this.searchQuery)
         .then(res => {
           this.isLoading = false
+          this.showNotification = res.tracks.total === 0
           this.tracks = res.tracks.items
         })
     },
@@ -55,6 +68,11 @@ export default {
 
 <template lang="pug">
 Header
+
+Notification(v-show="showNotification")
+  template(v-slot:body)
+    p No se encontraron resultados
+
 Loader(v-show="isLoading")
 section.section(v-show="!isLoading")
   nav.nav
