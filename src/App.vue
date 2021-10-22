@@ -17,7 +17,8 @@ export default {
     return {
       searchQuery: '',
       tracks: [],
-      isLoading: false
+      isLoading: false,
+      selectedTrack: ''
     }
   },
   computed: {
@@ -44,6 +45,9 @@ export default {
           this.isLoading = false
           this.tracks = res.tracks.items
         })
+    },
+    setSelectedTrack (id) {
+      this.selectedTrack = id
     }
   }
 }
@@ -53,7 +57,7 @@ export default {
 Header
 Loader(v-show="isLoading")
 section.section(v-show="!isLoading")
-  nav.nav.has-shadow
+  nav.nav
     .container
       input.input.is-large(type="text", placeholder="Buscar canciones", v-model="searchQuery")
       a.button.is-info.is-large(@click="search") Buscar
@@ -65,7 +69,7 @@ section.section(v-show="!isLoading")
   .container.results
     .columns.is-multiline
       .column.is-one-quarter(v-for="t in tracks")
-        Track(:track="t")
+        Track(:class="{ 'is-active': t.id===selectedTrack }" :track="t" @select="setSelectedTrack")
 Footer
 </template>
 
@@ -74,5 +78,9 @@ Footer
 
 .results {
   margin-top: 50px;
+}
+
+.is-active {
+  border: 3px #23d160 solid;
 }
 </style>
