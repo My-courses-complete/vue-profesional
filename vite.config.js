@@ -6,7 +6,7 @@ import { resolve } from 'path'
 export default defineConfig({
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')// eslint-disable-line
+      '@': resolve(__dirname, 'src'),// eslint-disable-line
     }
   },
   plugins: [vue()],
@@ -14,7 +14,7 @@ export default defineConfig({
     open: true
   },
   build: {
-    sourcemap: true,
+    sourcemap: true
   }
 }
 )

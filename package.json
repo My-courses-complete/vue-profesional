@@ -5,12 +5,14 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore src",
+    "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "prepare": "husky install"
   },
   "dependencies": {
     "axios": "^0.23.0",
     "bulma": "^0.9.3",
+    "mitt": "^3.0.0",
     "node-fetch": "^3.0.0",
     "vue": "^3.2.16"
   },
