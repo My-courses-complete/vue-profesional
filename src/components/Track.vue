@@ -14,7 +14,7 @@
           strong {{ track.name }}
         p.subtitle.is-6 {{ track.artists[0].name }}
     .content
-      small {{ track.duration_ms }}
+      small {{ $filter.convertMsToMm(track.duration_ms)}}
       nav.level
         .level-left
           a.level-item
