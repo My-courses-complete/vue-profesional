@@ -1,7 +1,7 @@
 <template lang="pug">
-.content(v-if="existTrack")
+.content(v-if="track && track.album")
   p.is-128x128
-    img(:src="urlTrack")
+    img(:src="this.track.album.images[0].url")
   p
     strong {{ track.name }}
     small [{{ track.duration_ms }}]
@@ -17,12 +17,6 @@ export default {
     }
   },
   computed: {
-    urlTrack () {
-      if (!this.track.album) {
-        return ''
-      }
-      return this.track.album.images[0].url
-    },
     existTrack () {
       return !!this.track.album
     }
