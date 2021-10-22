@@ -1,5 +1,5 @@
 <template lang="pug">
-.card
+.card(v-if="track && track.album")
   .card-image
     figure.image.is-1by1
       img(:src="track.album.images[0].url")
@@ -19,6 +19,8 @@
         .level-left
           a.level-item
             span.icon.is-small(@click="selectedTrack") ▶
+          a.level-item
+            span.icon.is-small(@click="goToTrack") 🌎
 </template>
 
 <script>
@@ -32,6 +34,9 @@ export default {
       this.$emit('select', this.track.id)
 
       this.$bus.emit('set-track', this.track)
+    },
+    goToTrack () {
+      this.$router.push(`/track/${this.track.id}`)
     }
   }
 }

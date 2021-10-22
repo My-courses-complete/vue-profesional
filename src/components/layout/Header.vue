@@ -1,12 +1,14 @@
 <template lang="pug">
 section.hero.is-success
   .hero-head
-    header.nav
+    header.navbar
       .container
-        .nav-left
-          .nav-item
+        .navbar-start
+          .navbar-item
             strong 📻 Searcher Music
-        .nav-right.nav-menu
+        .navbar-right.navbar-menu
+          router-link.navbar-item(to="/") Search
+          router-link.navbar-item(to="/About") About
   .hero-body
     .container.has-text-centered
       h1.title Music

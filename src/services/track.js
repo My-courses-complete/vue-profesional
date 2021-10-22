@@ -9,4 +9,8 @@ trackService.search = function (q) {
   return MusicService.get(`${configService.apiUrl}/search?q=${q}&type=${type}`).then(res => res.data)
 }
 
+trackService.getById = function (id) {
+  return MusicService.get(`${configService.apiUrl}/tracks/${id}`).then(res => res.data)
+}
+
 export default trackService
