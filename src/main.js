@@ -1,4 +1,7 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import Root from '@/App.vue'
+import EventBus from '@/plugins/event-bus'
 
-createApp(App).mount('#app')
+const app = createApp(Root)
+app.use(EventBus)
+app.mount('#app')

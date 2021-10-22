@@ -11,4 +11,13 @@ section.hero.is-success
     .container.has-text-centered
       h1.title Music
       h2.subtitle The best Music here!
+      Player
 </template>
+
+<script>
+import Player from '@/components/Player.vue'
+
+export default {
+  components: { Player }
+}
+</script>

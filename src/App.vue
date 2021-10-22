@@ -21,6 +21,8 @@ export default {
       tracks: [],
       isLoading: false,
       showNotification: false,
+      badNotification: false,
+      totalGet: 0,
       selectedTrack: ''
     }
   },
@@ -55,7 +57,9 @@ export default {
       trackService.search(this.searchQuery)
         .then(res => {
           this.isLoading = false
-          this.showNotification = res.tracks.total === 0
+          this.showNotification = true
+          this.badNotification = res.tracks.total === 0
+          this.totalGet = res.tracks.total
           this.tracks = res.tracks.items
         })
     },
@@ -69,9 +73,11 @@ export default {
 <template lang="pug">
 Header
 
-Notification(v-show="showNotification")
-  template(v-slot:body)
+Notification(v-show="showNotification" :typeNotification="badNotification")
+  template(v-slot:body v-if="badNotification")
     p No se encontraron resultados
+  template(v-slot:body v-else)
+    p se encontraron {{ totalGet }} resultados
 
 Loader(v-show="isLoading")
 section.section(v-show="!isLoading")
