@@ -17,9 +17,9 @@
       small {{ $filter.convertMsToMm(track.duration_ms)}}
       nav.level
         .level-left
-          a.level-item
+          button.level-item.button.is-primary
             span.icon.is-small(@click="selectedTrack") ▶
-          a.level-item
+          button.level-item.button.is-warning
             span.icon.is-small(@click="goToTrack") 🌎
 </template>
 
@@ -31,6 +31,7 @@ export default {
   emits: ['select'],
   methods: {
     selectedTrack () {
+      if (!this.track.preview_url) return
       this.$emit('select', this.track.id)
 
       this.$bus.emit('set-track', this.track)
