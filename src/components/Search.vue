@@ -1,12 +1,14 @@
 <template lang="pug">
 main
-  Notification(v-show="showNotification" :typeNotification="badNotification")
-    template(v-slot:body v-if="badNotification")
-      p No se encontraron resultados
-    template(v-slot:body v-else)
-      p se encontraron {{ totalGet }} resultados
+  transition(name="move")
+    Notification(v-show="showNotification" :typeNotification="badNotification")
+      template(v-slot:body v-if="badNotification")
+        p No se encontraron resultados
+      template(v-slot:body v-else)
+        p se encontraron {{ totalGet }} resultados
 
-  Loader(v-show="isLoading")
+  transition(name="move")
+    Loader(v-show="isLoading")
   section.section(v-show="!isLoading")
     nav.nav
       .container
