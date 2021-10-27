@@ -10,7 +10,11 @@ main
   section.section(v-show="!isLoading")
     nav.nav
       .container
-        input.input.is-large(type="text", placeholder="Buscar canciones", v-model="searchQuery")
+        input.input.is-large(
+          type="text",
+          placeholder="Buscar canciones",
+          v-model="searchQuery",
+          @keyup.enter="search")
         a.button.is-info.is-large(@click="search") Buscar
         a.button.is-danger.is-large &times;
     .container
@@ -20,7 +24,7 @@ main
     .container.results
       .columns.is-multiline
         .column.is-one-quarter(v-for="t in tracks")
-          Track(:class="{ 'is-active': t.id===selectedTrack }" :track="t" @select="setSelectedTrack")
+          Track(v-blur="t.preview_url" :class="{ 'is-active': t.id===selectedTrack }" :track="t" @select="setSelectedTrack")
 </template>
 
 <script>
