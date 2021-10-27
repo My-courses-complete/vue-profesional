@@ -24,18 +24,15 @@
 </template>
 
 <script>
+import TrackMixin from '@/mixins/track'
+
 export default {
+  mixins: [TrackMixin],
   props: {
     track: { type: Object, required: true }
   },
   emits: ['select'],
   methods: {
-    selectedTrack () {
-      if (!this.track.preview_url) return
-      this.$emit('select', this.track.id)
-
-      this.$bus.emit('set-track', this.track)
-    },
     goToTrack () {
       this.$router.push(`/track/${this.track.id}`)
     }
