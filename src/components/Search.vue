@@ -10,7 +10,7 @@ main
   transition(name="move")
     Loader(v-show="isLoading")
   section.section(v-show="!isLoading")
-    nav.nav
+    nav.navbar
       .container
         input.input.is-large(
           type="text",
