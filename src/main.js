@@ -5,6 +5,7 @@ import EventBus from '@/plugins/event-bus'
 import MsToMm from '@/filters/ms-to-mm'
 import Blur from '@/directives/blur'
 import routes from '@/routes'
+import store from './store'
 
 import Root from '@/App.vue'
 
@@ -18,4 +19,5 @@ app.use(EventBus)
 app.use(MsToMm)
 app.use(Blur)
 app.use(router)
+app.use(store)
 app.mount('#app')
