@@ -3,12 +3,14 @@ section.hero.is-success
   .hero-head
     header.navbar
       .container
-        .navbar-start
+        .navbar-left
           .navbar-item
             strong 📻 Searcher Music
         .navbar-right.navbar-menu
-          router-link.navbar-item(to="/") Search
-          router-link.navbar-item(to="/About") About
+          a.navbar-item(@click="selectLang('en')") 🇬🇧
+          a.navbar-item(@click="selectLang('es')") 🇲🇽
+          router-link.navbar-item(to="/") {{ $t('search')}}
+          router-link.navbar-item(to="/About") {{ $t('about') }}
   .hero-body
     .container.has-text-centered
       h1.title Music
@@ -20,6 +22,11 @@ section.hero.is-success
 import Player from '@/components/Player.vue'
 
 export default {
-  components: { Player }
+  components: { Player },
+  methods: {
+    selectLang (lang) {
+      this.$i18n.locale = lang
+    }
+  }
 }
 </script>

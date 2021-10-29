@@ -6,8 +6,8 @@ import MsToMm from '@/filters/ms-to-mm'
 import Blur from '@/directives/blur'
 import routes from '@/routes'
 import store from './store'
-
 import Root from '@/App.vue'
+import i18n from './i18n'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -15,6 +15,7 @@ const router = createRouter({
 })
 
 const app = createApp(Root)
+app.use(i18n)
 app.use(EventBus)
 app.use(MsToMm)
 app.use(Blur)
