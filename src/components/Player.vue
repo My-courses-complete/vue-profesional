@@ -10,28 +10,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  data () {
-    return {
-      track: {}
-    }
-  },
   computed: {
-    existTrack () {
-      return !!this.track.album
-    }
-  },
-  created () {
-    this.$bus.on('set-track', (track) => {
-      this.track = track
-    })
+    ...mapState(['track'])
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  img {
-    width: 124px;
-    border-radius: 50%;
-  }
+img {
+  width: 124px;
+  border-radius: 50%;
+}
 </style>
